@@ -9,6 +9,7 @@
   %>
   <% if @access_token %>
     <div>
+      <h2>Wassup <%= @new_user.username %></h2>
       <p>
         <strong>token:</strong> <%= @access_token.token %><br>
         <strong>secret:</strong> <%= @access_token.secret %><br>

@@ -13,6 +13,7 @@ def request_token
     host_and_port = request.host
     host_and_port << ":9393" if request.host == "localhost"
 
+
     # the `oauth_consumer` method is defined above
     session[:request_token] = oauth_consumer.get_request_token(
       :oauth_callback => "http://#{host_and_port}/auth"
