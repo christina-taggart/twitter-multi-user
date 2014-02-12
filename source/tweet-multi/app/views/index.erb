@@ -22,3 +22,19 @@
   <% end %>
 
 </div>
+
+ <!-- more testing  -->
+<div class="testing">
+  <form method="post" action="/tweet">
+    <% if session[:id] %>
+    <table>
+      <tr>
+        <td>Currently logged in as: <%= @user.username %>
+      <tr>
+        <td><input type="text" name="message">
+            <input type="submit" value="Tweet this">
+    </table>
+  <% else %>
+    Not logged in.
+  <% end %>
+</div>
