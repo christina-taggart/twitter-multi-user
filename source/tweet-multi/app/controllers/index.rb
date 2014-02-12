@@ -23,3 +23,7 @@ get '/auth' do
   erb :index
 
 end
+
+error do
+  "Oh crap something went wrong – " + response.env[sinatra.error].message
+end
