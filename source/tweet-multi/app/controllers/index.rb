@@ -14,9 +14,18 @@ end
 get '/auth' do
   @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
 
+  session[:access_token] = @access_token.token
+  session[:access_token_secret] = @access_token.secret
+
   User.create(username: @access_token.params[:screen_name], oauth_token: @access_token.secret, oauth_secret: @access_token.token)
 
   session.delete(:request_token)
   erb :index
 
+end
+
+post '/tweet' do
+  client.update(params[:tweet])
+  p client
+  redirect 'https://twitter.com/nifengle'
 end

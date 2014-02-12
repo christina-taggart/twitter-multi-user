@@ -52,4 +52,3 @@ require APP_ROOT.join('config', 'database')
 #API keys
 keys = YAML.load_file(APP_ROOT.join('config', 'keys.yml'))
 keys.each{|k,v| ENV[k]=v}
-
