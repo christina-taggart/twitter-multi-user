@@ -8,6 +8,9 @@
     # user logged-in, we should show the sign-in button.
   %>
   <% if @access_token %>
+  <div class="write">
+    Tweet This Ish: <input type="text">
+  </div>
     <div>
       <p>
         <strong>token:</strong> <%= @access_token.token %><br>
