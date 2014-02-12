@@ -22,7 +22,7 @@ require 'erb'
 
 require 'oauth'
 require 'twitter'
-
+require 'yaml'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
@@ -47,3 +47,9 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+
+#API keys
+keys = YAML.load_file(APP_ROOT.join('config', 'keys.yml'))
+keys.each{|k,v| ENV[k]=v}
+
