@@ -1,3 +1,4 @@
+
 get '/' do
   erb :index
 end
@@ -19,6 +20,10 @@ get '/auth' do
   session.delete(:request_token)
 
   # at this point in the code is where you'll need to create your user account and store the access token
+ User.create(
+  username: @access_token.params["screen_name"],
+  oauth_secret: @access_token.secret,
+  oauth_token: @access_token.token)
 
   erb :index
 
