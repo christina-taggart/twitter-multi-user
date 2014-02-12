@@ -20,3 +20,14 @@ def request_token
   end
   session[:request_token]
 end
+
+@client = nil
+
+def set_up_client(oauth_token, oauth_secret)
+  @client = Twitter::REST::Client.new do |config|
+    config.consumer_key        = ENV['TWITTER_KEY']
+    config.consumer_secret     = ENV['TWITTER_SECRET']
+    config.access_token        = oauth_token
+    config.access_token_secret = oauth_secret
+  end
+end
