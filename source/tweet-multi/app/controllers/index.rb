@@ -1,3 +1,8 @@
+require 'twitter'
+
+
+
+
 get '/' do
   erb :index
 end
@@ -25,8 +30,26 @@ get '/auth' do
   @new_user = User.create(username: username, oauth_token: token, oauth_secret: secret)
   # at this point in the code is where you'll need to create your user account and store the access token
 
+  redirect "/#{@new_user.id}"
   erb :index
+end
 
+get '/:user_id' do
+  @user = User.find(params[:user_id])
+  erb :user
+end
+
+post '/:user_id' do
+  @user = User.find(params[:user_id])
+  client = Twitter::REST::Client.new do |config|
+    config.consumer_key        = ENV['TWITTER_KEY']
+    config.consumer_secret     = ENV['TWITTER_SECRET']
+    config.access_token        = @user.oauth_token
+    config.access_token_secret = @user.oauth_secret
+  end
+
+  client.update(params[:tweet])
+  erb :user
 end
 
 # 8sahicp0G2FlJA7cRFVneQ

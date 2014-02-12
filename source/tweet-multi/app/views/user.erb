@@ -1,0 +1,6 @@
+Welcome <%= @user.username %>!<br>
+        <a href='/sign_out'>Sign Out</a>
+        <form action="/<%= @user.id %>" method="post">
+          <input type='text' name='tweet' placeholder='Tweet here!'>
+          <input type='submit' value='submit!'>
+        </form>
