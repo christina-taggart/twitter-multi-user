@@ -1,8 +1,5 @@
 require 'twitter'
 
-
-
-
 get '/' do
   erb :index
 end
@@ -41,19 +38,7 @@ end
 
 post '/:user_id' do
   @user = User.find(params[:user_id])
-  client = Twitter::REST::Client.new do |config|
-    config.consumer_key        = ENV['TWITTER_KEY']
-    config.consumer_secret     = ENV['TWITTER_SECRET']
-    config.access_token        = @user.oauth_token
-    config.access_token_secret = @user.oauth_secret
-  end
-
+  client = configure_client(@user.oauth_token, @user.oauth_secret)
   client.update(params[:tweet])
   erb :user
 end
-
-# 8sahicp0G2FlJA7cRFVneQ
-# GvOqlUVfVbMuEx9UAsGWysoH7OcXIzvtphKRtXjog
-
-# p0jzdtYoZZtnfX6nXP4pA
-# sZbuDZxzpx5FHUpxixjRbouT06gOgsyBZoUnpMeZo
