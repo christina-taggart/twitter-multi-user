@@ -5,7 +5,6 @@ def oauth_consumer
     ENV['TWITTER_SECRET'],
     :site => "https://api.twitter.com"
   )
-  p @consumer
 end
 
 def request_token
