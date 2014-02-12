@@ -23,3 +23,10 @@ get '/auth' do
   session[:user_id] = @new_user.id
   erb :index
 end
+
+post '/tweets' do
+  new_message = params[:new_message]
+  @curr_user = User.find(session[:user_id])
+  @curr_user.tweet(new_message)
+  redirect '/'
+end

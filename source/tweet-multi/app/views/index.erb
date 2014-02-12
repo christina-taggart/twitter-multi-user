@@ -14,6 +14,10 @@
         <strong>token:</strong> <%= @access_token.token %><br>
         <strong>secret:</strong> <%= @access_token.secret %><br>
       </p>
+      <form action="/tweets" method="post">
+        <input type="text" name="new_message"></input>
+        <input type="submit" value="tweet"></input>
+      </form>
       <p>
         <button><a href="/sign_out">Sign Out</a></button>
       </p>
