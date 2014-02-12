@@ -25,6 +25,16 @@ get '/auth' do
   oauth_secret: @access_token.secret,
   oauth_token: @access_token.token)
 
-  erb :index
+ # Create twitter client
+ # TODO: put in a helper method
+ twitter = Twitter::REST::Client.new do |config|
+   config.consumer_key        = ENV['TWITTER_KEY']
+   config.consumer_secret     = ENV['TWITTER_SECRET']
+   config.access_token        = User.last.oauth_token
+   config.access_token_secret = User.last.oauth_secret
+ end
+
+# twitter.update("if I really wanted to tweet")
+erb :index
 
 end
