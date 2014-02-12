@@ -41,6 +41,13 @@ configure do
   set :views, File.join(Sinatra::Application.root, "app", "views")
 end
 
+$client = Twitter::REST::Client.new do |config|
+  config.consumer_key        = ENV['CONSUMER_KEY']
+  config.consumer_secret     = ENV['CONSUMER_SECRET']
+  config.access_token        = ENV['ACCESS_TOKEN']
+  config.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
+end
+
 # Set up the controllers and helpers
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
