@@ -36,7 +36,7 @@ post '/tweet' do
   tweet = params[:tweet]
   set_up_client(current_user.oauth_token, current_user.oauth_secret)
   @client.update(tweet)
-  erb :index
+  redirect '/'
 end
 
 error do
