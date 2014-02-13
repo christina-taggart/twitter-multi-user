@@ -1,3 +1,7 @@
+before do
+
+end
+
 get '/' do
   erb :index
 end
@@ -18,18 +22,24 @@ get '/auth' do
   session.delete(:request_token)
 
     if session[:id] == nil
-      @user = User.create(username: @access_token.params[:screen_name], oauth_token: @access_token.params[:oauth_token], oauth_secret: @access_token.params[:oauth_token_secret])
+      @user = User.create(username: @access_token.params[:screen_name], oauth_token: @access_token.token, oauth_secret: @access_token.secret)
       session[:id]= @user.id
       session[:logged_in] = true
 
       #need for posting tweets?
-      session[:oauth_token] = @user.oauth_token
-      session[:oauth_token_secret] = @user.oauth_secret
+      
     end
   erb :index
 end
 
 
 post '/tweet' do
-  p params
+  @user = User.find(session[:id])
+   client = Twitter::REST::Client.new do |config|
+    config.consumer_key =  ENV["TWITTER_KEY"]
+    config.consumer_secret = ENV["TWITTER_SECRET"]
+    config.access_token = @user.oauth_token
+    config.access_token_secret = @user.oauth_secret
+  end
+  client.update("tweet")
 end
