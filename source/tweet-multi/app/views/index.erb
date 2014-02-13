@@ -10,6 +10,14 @@
   <% if @access_token %>
     <div>
       <p>
+
+        <FORM  id="add_tweet"
+              action="/tweet"
+              enctype="multipart/form-data"
+              method="post">
+           <p><INPUT type="text" placeholder="tweet something" name="tweet_text" id="tweet_text"></p>
+           <p> <input type="submit" value="Submit"></p>
+
         <strong>token:</strong> <%= @access_token.token %><br>
         <strong>secret:</strong> <%= @access_token.secret %><br>
       </p>
