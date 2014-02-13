@@ -2,12 +2,6 @@ before do
   if session[:id]
     @user = User.find(session[:id])
     @access_token = session[:access_token]
-    $client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV["TWITTER_KEY"]
-      config.consumer_secret     = ENV["TWITTER_SECRET"]
-      config.access_token        = @user.oauth_token
-      config.access_token_secret = @user.oauth_secret
-    end
   end
 
 end
@@ -42,9 +36,17 @@ get '/auth' do
 end
 
 post '/tweet_something' do
-$client.update(params[:status])
-p params
-@tweet = Tweet.create(status: params[:status], user_id: @user.id)
-erb :index
+  content_type :json
+  @user = User.find(1)
+    @access_token = session[:access_token]
+   $client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV["TWITTER_KEY"]
+      config.consumer_secret     = ENV["TWITTER_SECRET"]
+      config.access_token        = @user.oauth_token
+      config.access_token_secret = @user.oauth_secret
+    end
+$client.update(status: params[:status])
 
+@tweet = Tweet.create(status: params[:status], user_id: @user.id)
+@tweet.to_json
 end

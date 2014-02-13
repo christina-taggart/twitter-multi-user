@@ -14,7 +14,9 @@ require 'pathname'
 require 'pg'
 require 'active_record'
 require 'logger'
+require 'redis'
 
+require 'sidekiq'
 require 'sinatra'
 require "sinatra/reloader" if development?
 
@@ -22,6 +24,7 @@ require 'erb'
 
 require 'oauth'
 require 'twitter'
+require 'json'
 
 
 # Some helper constants for path-centric logic
