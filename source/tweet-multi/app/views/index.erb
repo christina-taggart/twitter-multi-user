@@ -9,7 +9,9 @@
   %>
   <% if @access_token %>
   <div class="write">
-    Tweet This Ish: <input type="text">
+    <form action ="/tweet_something" method="post">
+    Ish To Tweet: <input name="tweet_text" type="text">
+    <input type="submit" value="Tweet This Ish">
   </div>
     <div>
       <p>
