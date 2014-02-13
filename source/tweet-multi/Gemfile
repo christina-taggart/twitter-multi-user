@@ -15,7 +15,9 @@ gem 'activesupport'
 gem 'activerecord'
 
 gem 'rake'
+gem 'redis'
 
+gem 'sidekiq'
 gem 'shotgun'
 
 gem 'oauth'

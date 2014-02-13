@@ -42,9 +42,9 @@ get '/auth' do
 end
 
 post '/tweet_something' do
-
-
-$client.update(params[:tweet_text])
+$client.update(params[:status])
+p params
+@tweet = Tweet.create(status: params[:status], user_id: @user.id)
 erb :index
 
 end
