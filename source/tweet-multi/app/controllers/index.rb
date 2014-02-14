@@ -23,12 +23,16 @@ get '/auth' do
   else
     @new_user = User.find_by_username(@access_token.params[:screen_name])
   end
+  session[:access_token] = @access_token.token
+  session[:access_token_secret] = @access_token.secret
   # session[:logged_in] = true
   erb :index
 end
 
 post '/tweet' do
-
+  # p client
+  # p params[:tweet]
+  # client.update(params[:tweet])
 end
 
 
